@@ -6,19 +6,101 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "commit": "git add . && cz",
+    "release": "commit-and-tag-version",
+    "release:major": "npm run release -- --release-as major",
+    "release:minor": "npm run release -- --release-as minor",
+    "release:patch": "npm run release -- --release-as patch"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.0",
+    "clsx": "^2.1.0",
+    "framer-motion": "^11.11.6",
+    "lenis": "^1.1.13",
+    "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.15"
+    "tailwind-merge": "^2.5.3"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@biomejs/biome": "^1.8.3",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/cz-commitlint": "^19.2.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "commit-and-tag-version": "^12.4.2",
+    "cz-conventional-changelog": "^3.3.0",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "types": {
+        "feat": {
+          "description": "A new feature",
+          "title": "Features",
+          "emoji": "✨"
+        },
+        "fix": {
+          "description": "A bug fix",
+          "title": "Bug Fixes",
+          "emoji": "🐛"
+        },
+        "docs": {
+          "description": "Documentation only changes",
+          "title": "Documentation",
+          "emoji": "📚"
+        },
+        "style": {
+          "description": "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
+          "title": "Styles",
+          "emoji": "💎"
+        },
+        "refactor": {
+          "description": "A code change that neither fixes a bug nor adds a feature",
+          "title": "Code Refactoring",
+          "emoji": "📦"
+        },
+        "perf": {
+          "description": "A code change that improves performance",
+          "title": "Performance Improvements",
+          "emoji": "🚀"
+        },
+        "test": {
+          "description": "Adding missing tests or correcting existing tests",
+          "title": "Tests",
+          "emoji": "🚨"
+        },
+        "build": {
+          "description": "Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)",
+          "title": "Builds",
+          "emoji": "🛠"
+        },
+        "ci": {
+          "description": "Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)",
+          "title": "Continuous Integrations",
+          "emoji": "⚙️"
+        },
+        "chore": {
+          "description": "Other changes that don't modify src or test files",
+          "title": "Chores",
+          "emoji": "♻️"
+        },
+        "revert": {
+          "description": "Reverts a previous commit",
+          "title": "Reverts",
+          "emoji": "🗑"
+        },
+        "misc": {
+          "description": "Misc changes and/or updates.",
+          "title": "Misc",
+          "emoji": "👉"
+        }
+      }
+    }
   }
 }

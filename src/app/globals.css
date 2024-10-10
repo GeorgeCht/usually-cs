@@ -2,26 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  /* 
+   * Prevent default scrollbar 
+   */
+  html,
+  body {
+    width: 100%;
+    scrollbar-width: none;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  main::-webkit-scrollbar,
+  .disable-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* 
+   * Selection colors 
+   */
+  ::selection {
+    background-color: #000;
+    color: #fff;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* 
+   * Linkflip 
+   */
+  .linkflip > span {
+    display: inline-block;
+    position: relative;
+    line-height: normal;
+    z-index: 1;
+    transition: -webkit-transform 1.175s cubic-bezier(0.15, 1, 0.15, 1);
+    transition: transform 1.175s cubic-bezier(0.15, 1, 0.15, 1);
+  }
+  .linkflip > span::after {
+    content: attr(data-text);
+    display: block;
+    position: absolute;
+  }
+  .linkflip > span::after {
+    top: 100%;
+    transform-origin: left top;
+    transition: -webkit-transform 2s cubic-bezier(0.2, 1, 0.22, 1);
+    transition: transform 2s cubic-bezier(0.2, 1, 0.22, 1);
+  }
+  .linkflip:hover > span {
+    transform: translateY(-100%);
+  }
+
+  /* 
+   * CSS Marquee 
+   */
+  :root {
+    --gap: 14em;
+    --duration: 20s;
   }
 }

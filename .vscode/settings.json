@@ -1,0 +1,19 @@
+{
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "conventionalCommits.gitmoji": false,
+  "editor.formatOnSave": true,
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/page.tsx": "${dirname} | page.tsx",
+    "**/app/**/layout.tsx": "${dirname} | layout.tsx"
+  },
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true
+}
