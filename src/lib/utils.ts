@@ -30,3 +30,41 @@ export const easing = {
   customExpo: [1, 0.2, 0.1, 1],
   inOutCirc: [0.785, 0.135, 0.15, 0.86],
 }
+
+/**
+ * Standard `framer-motion` animation variants.
+ *
+ * Includes 3 states for enter, exit, and initial.
+ *
+ * @param {Variants} variants User defined variants for `initial`, `enter`, and `exit` states.
+ * @returns `framer-motion` matching variant props
+ *
+ * @example
+ * ```tsx
+ * import { animateVariants } from '@/lib/utils'
+ *
+ * return (
+ *  <Motion.div
+ *    {...animateVariants({
+ *      initial: {
+ *        opacity: 0,
+ *        transition: {
+ *          duration: 0.5,
+ *          ease: easing.inOutQuad,
+ *        },
+ *      },
+ *      enter: { ... },
+ *      exit: { ... },
+ *    })}
+ *  />
+ * )
+ * ```
+ */
+export const animateVariants = (variants: Variants) => {
+  return {
+    variants,
+    initial: 'initial',
+    animate: 'enter',
+    exit: 'exit',
+  }
+}
