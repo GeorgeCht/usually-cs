@@ -16,7 +16,7 @@ const PageWrapper = React.forwardRef<
       {startContent || null}
       <article
         aria-roledescription={'page-container'}
-        className={cn('w-full min-h-dvh sm:px-12 px-6 z-0', className)}
+        className={cn('relative w-full min-h-dvh sm:px-12 px-6 z-0', className)}
         {...props}
         ref={ref}
       >

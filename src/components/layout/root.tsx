@@ -18,32 +18,30 @@ export const RootLayout = ({
 
   return (
     <html lang={'en'} className={font.className} suppressHydrationWarning>
-      <Lenis root>
-        <body className={'bg-white'}>
-          <main ref={ref}>
-            <NavHeader />
-            {children}
-          </main>
-          <AnimatedCursor
-            showSystemCursor
-            color={'0, 0, 0'}
-            clickables={[
-              'a',
-              'input[type="text"]',
-              'input[type="email"]',
-              'input[type="number"]',
-              'input[type="submit"]',
-              'input[type="image"]',
-              'label[for]',
-              'select',
-              'textarea',
-              'button',
-              '.link',
-              '.button-perspective',
-            ]}
-          />
-        </body>
-      </Lenis>
+      {/* <Lenis root> */}
+      <body className={'bg-white'}>
+        <main ref={ref}>
+          <NavHeader />
+          {children}
+        </main>
+        <AnimatedCursor
+          showSystemCursor
+          color={'0, 0, 0'}
+          clickables={[
+            'a',
+            'input[type="text"]',
+            'input[type="email"]',
+            'input[type="number"]',
+            'input[type="submit"]',
+            'input[type="image"]',
+            'label[for]',
+            'select',
+            'textarea',
+            'button',
+          ]}
+        />
+      </body>
+      {/* </Lenis> */}
     </html>
   )
 }

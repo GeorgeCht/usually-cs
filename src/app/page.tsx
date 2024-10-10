@@ -3,13 +3,17 @@
 import React from 'react'
 
 import { AnimatePresence, motion as Motion } from 'framer-motion'
+import { circInOut } from 'framer-motion'
+
 import { useScreenSize } from '@/lib/hooks'
-import { animateVariants, easing } from '@/lib/utils'
+import { animateVariants, cn, easing } from '@/lib/utils'
+
 import { PageWrapper } from '@/components/layout/wrapper'
 import { PageSection } from '@/components/layout/section'
 import { FadeInImage } from '@/components/misc/image'
-import { Arrow } from '@/components/vectors/arrows'
+import { HeroLetters } from '@/components/vectors/hero'
 import { Button } from '@/components/ui/button'
+import { Arrow } from '@/components/vectors/arrows'
 
 const storiesData = [
   {
@@ -50,14 +54,18 @@ const storiesData = [
 type StoryData = (typeof storiesData)[number]
 
 const HeroContent = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => (
+  className,
+  ...props
+}: React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>) => (
   <div
-    className={
-      'flex flex-col w-full max-lg:items-center max-lg:w-full lg:w-[498px]'
-    }
+    className={cn(
+      'flex flex-col w-full max-lg:items-center max-lg:w-full lg:w-[498px]',
+      className,
+    )}
+    {...props}
   >
     <p
       className={
@@ -72,7 +80,8 @@ const HeroContent = ({
       }
       style={{ fontFeatureSettings: '"ss01" 1' }}
     >
-      {children}
+      We are a creative workspace usually focusing on branding & packaging but
+      always going beyond that.
     </h3>
     <Button outbound className={'mt-8 w-fit'}>
       <span>Contact us</span>
@@ -334,6 +343,33 @@ const StoriesSection = ({
   )
 }
 
+const AnimatedCircularBackground = () => {
+  const { screenSize } = useScreenSize()
+
+  // set animateTo to the biggest of either screenSize.width or screenSize.height
+
+  const animateTo = Math.max(screenSize.width, screenSize.height) * 1.5
+
+  return (
+    <div
+      className={
+        'absolute flex items-center justify-center inset-0 size-full z-0 overflow-hidden pointer-events-none'
+      }
+    >
+      <Motion.div
+        initial={{ width: 0, height: 0 }}
+        animate={{ width: animateTo, height: animateTo }}
+        transition={{
+          easings: circInOut(1),
+          duration: 0.375,
+          delay: 0.333,
+        }}
+        className={'size-full aspect-square rounded-full bg-[#FFF200]'}
+      />
+    </div>
+  )
+}
+
 export default function HomePage() {
   const { screenSize } = useScreenSize()
 
@@ -357,29 +393,90 @@ export default function HomePage() {
 
   return (
     <PageWrapper className={'flex flex-col justify-end transition-all'}>
+      <AnimatedCircularBackground />
       <PageSection
         className={
-          'flex flex-col justify-end w-full min-h-fit sm:min-h-[80vh] h-full pb-4 z-0'
+          'flex flex-col justify-between w-full sm:min-h-[calc(100vh-120px)] min-h-[calc(100vh-80px)] h-full pb-4 z-0'
         }
         ref={section}
       >
         <div
-          ref={heroContentRef}
           className={
-            'w-full flex lg:flex-row flex-col gap-6 justify-between lg:items-end sm:pt-12 pb-8'
+            'relative flex flex-row gap-[0.725%] w-full *:text-black *:h-auto'
           }
         >
-          <HeroContent>
-            We are a creative workspace usually focusing on branding & packaging
-            but always going beyond that.
-          </HeroContent>
+          <HeroLetters.U
+            relativeWidth
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          />
+          <HeroLetters.S
+            relativeWidth
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className={'mx-[0.725%]'}
+          />
+          <HeroLetters.U
+            relativeWidth
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          />
+          <HeroLetters.A
+            relativeWidth
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className={'mr-[0.666%]'}
+          />
+          <HeroLetters.L
+            relativeWidth
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className={'mr-[1%]'}
+          />
+          <HeroLetters.L
+            relativeWidth
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+          />
+          <HeroLetters.Y
+            relativeWidth
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className={'-ml-[2.333%]'}
+          />
+        </div>
+        <Motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, type: 'spring' }}
+          className={'lg:hidden'}
+        >
+          <HeroContent />
+        </Motion.div>
+        <Motion.div
+          ref={heroContentRef}
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, type: 'spring', mass: 0.7, duration: 1.2 }}
+          className={
+            'w-full flex lg:flex-row flex-col gap-6 justify-between lg:items-end sm:pt-12 sm:pb-8 max-sm:pb-2'
+          }
+        >
+          <HeroContent className={'max-lg:hidden'} />
           <StoriesSection
             storiesAreOpen={storiesAreOpen}
             setStoriesAreOpen={setStoriesAreOpen}
             storiesIndex={storiesIndex}
             setStoriesIndex={setStoriesIndex}
           />
-        </div>
+        </Motion.div>
       </PageSection>
     </PageWrapper>
   )

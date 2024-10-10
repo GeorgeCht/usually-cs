@@ -55,7 +55,11 @@ export const NavHeader = ({ className }: { className?: string }) => {
         className,
       )}
     >
-      <div className={'group flex basis-1/3 justify-start'}>
+      <Motion.div
+        initial={{ opacity: 0, y: -25 }}
+        animate={{ opacity: 1, y: 0 }}
+        className={'group flex basis-1/3 justify-start'}
+      >
         <Link href={'/'}>
           <Motion.div
             suppressHydrationWarning
@@ -75,13 +79,17 @@ export const NavHeader = ({ className }: { className?: string }) => {
           </Motion.div>
           <span className={'sr-only'}>Logo</span>
         </Link>
-      </div>
+      </Motion.div>
       <div
         className={
           'group min-[430px]:flex hidden basis-1/3 justify-center m-auto'
         }
       />
-      <div className={'relative flex basis-1/3 justify-end'}>
+      <Motion.div
+        initial={{ opacity: 0, y: -25 }}
+        animate={{ opacity: 1, y: 0 }}
+        className={'relative flex basis-1/3 justify-end'}
+      >
         <Magnetic>
           <LinkFlip
             className={'uppercase font-bold'}
@@ -89,7 +97,7 @@ export const NavHeader = ({ className }: { className?: string }) => {
             text={'(instagram)'}
           />
         </Magnetic>
-      </div>
+      </Motion.div>
     </nav>
   )
 }
