@@ -64,9 +64,19 @@ const aeonik = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Usually Design',
+  title: 'Usually Design | Coming Soon',
   description:
     'We are a creative workspace usually focusing on branding and packaging but always going beyond that.',
+  keywords: [
+    'branding',
+    'packaging',
+    'design',
+    'website',
+    'portfolio',
+    'agency',
+    'athens',
+    'greece',
+  ],
   icons: {
     icon: '/favicon.ico',
   },

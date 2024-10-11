@@ -382,9 +382,18 @@ function CursorCore({
   }
 
   return (
-    <>
-      <div ref={cursorOuterRef} style={styles.cursorOuter} />
-      <div ref={cursorInnerRef} style={styles.cursorInner}>
+    <React.Fragment>
+      <div
+        aria-describedby={'cursor'}
+        ref={cursorOuterRef}
+        style={styles.cursorOuter}
+      />
+      <div
+        data-state={isActive ? 'active' : 'inactive'}
+        aria-describedby={'cursor'}
+        ref={cursorInnerRef}
+        style={styles.cursorInner}
+      >
         <div
           style={{
             opacity: !options.children ? 0 : 1,
@@ -394,7 +403,7 @@ function CursorCore({
           {options.children}
         </div>
       </div>
-    </>
+    </React.Fragment>
   )
 }
 
@@ -418,7 +427,7 @@ export function AnimatedCursor({
 }: AnimatedCursorProps) {
   const isTouchdevice = useIsTouchdevice()
   if (typeof window !== 'undefined' && isTouchdevice) {
-    return <></>
+    return <React.Fragment />
   }
   return (
     <CursorCore

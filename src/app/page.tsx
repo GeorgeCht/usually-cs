@@ -4,9 +4,11 @@ import React from 'react'
 
 import { AnimatePresence, motion as Motion } from 'framer-motion'
 import { circInOut } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 
 import { useScreenSize } from '@/lib/hooks'
 import { animateVariants, cn, easing } from '@/lib/utils'
+import { heroParagraphData, storiesData, type Story } from '@/lib/data'
 
 import { PageWrapper } from '@/components/layout/wrapper'
 import { PageSection } from '@/components/layout/section'
@@ -15,85 +17,53 @@ import { HeroLetters } from '@/components/vectors/hero'
 import { Button } from '@/components/ui/button'
 import { Arrow } from '@/components/vectors/arrows'
 
-const storiesData = [
-  {
-    title: 'Cross & Roll Brand Creation',
-    link: '/',
-    img: {
-      src: '/img/crossroll_big.png',
-      width: 1635,
-      height: 1080,
-    },
-    tags: '(packaging) (branding)',
-    year: '2022',
-  },
-  {
-    title: 'Jamin Brand Design',
-    link: '/',
-    img: {
-      src: '/img/crossroll_big.png',
-      width: 1635,
-      height: 1080,
-    },
-    tags: '(other) (design)',
-    year: '2023',
-  },
-  {
-    title: 'Tesoro Packaging',
-    link: '/',
-    img: {
-      src: '/img/crossroll_big.png',
-      width: 1635,
-      height: 1080,
-    },
-    tags: '(test) (packaging)',
-    year: '2024',
-  },
-] as const
-
-type StoryData = (typeof storiesData)[number]
-
 const HeroContent = ({
   className,
   ...props
 }: React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
->) => (
-  <div
-    className={cn(
-      'flex flex-col w-full max-lg:items-center max-lg:w-full lg:w-[498px]',
-      className,
-    )}
-    {...props}
-  >
-    <p
-      className={
-        'uppercase font-aeonik font-extrabold max-lg:text-center text-black pb-3'
-      }
+>) => {
+  const router = useRouter()
+  return (
+    <div
+      className={cn(
+        'flex flex-col w-full max-lg:items-center max-lg:w-full lg:w-[498px]',
+        className,
+      )}
+      {...props}
     >
-      Full website coming soon
-    </p>
-    <h3
-      className={
-        'font-aeonik font-medium text-black text-2xl max-lg:text-center max-lg:px-16 max-sm:px-2'
-      }
-      style={{ fontFeatureSettings: '"ss01" 1' }}
-    >
-      We are a creative workspace usually focusing on branding & packaging but
-      always going beyond that.
-    </h3>
-    <Button outbound className={'mt-8 w-fit'}>
-      <span>Contact us</span>
-    </Button>
-  </div>
-)
+      <p
+        className={
+          'uppercase font-aeonik font-extrabold max-lg:text-center text-black pb-3'
+        }
+      >
+        {heroParagraphData.label}
+      </p>
+      <h3
+        className={
+          'font-aeonik font-medium text-black text-2xl max-lg:text-center max-lg:px-16 max-sm:px-2'
+        }
+        style={{ fontFeatureSettings: '"ss01" 1' }}
+      >
+        {heroParagraphData.text}
+      </h3>
+      <Button
+        outbound
+        onClick={() => router.push(heroParagraphData.button.url)}
+        className={'mt-8 w-fit'}
+      >
+        <span>{heroParagraphData.button.label}</span>
+      </Button>
+    </div>
+  )
+}
 
 const StoryPreview = ({
   story,
   isOpen,
 }: {
-  story: StoryData
+  story: Story
   isOpen: boolean
 }) => {
   const { screenSize } = useScreenSize()
@@ -140,7 +110,7 @@ const StoryPreviewContent = ({
   story,
   isOpen,
 }: {
-  story: StoryData
+  story: Story
   isOpen: boolean
 }) => (
   <React.Fragment>
@@ -236,7 +206,7 @@ const StoryPreviewContent = ({
 const StoryPreviewImage = ({
   story,
 }: {
-  story: StoryData
+  story: Story
 }) => (
   <Motion.div
     key={story.title}
